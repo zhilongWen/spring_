@@ -14,6 +14,7 @@
         <module>small-spring/small-spring-step-02</module>
         <module>small-spring/small-spring-step-03</module>
         <module>small-spring/small-spring-step-04</module>
+        <module>small-spring/small-spring-step-05</module>
     </modules>
 
     <properties>
@@ -48,6 +49,11 @@
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
                 <version>3.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.8.11</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -152,10 +158,10 @@
         </pluginManagement>
 
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
