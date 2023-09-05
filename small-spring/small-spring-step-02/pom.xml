@@ -12,9 +12,13 @@
 
     <artifactId>small-spring-step-02</artifactId>
 
+
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <javadoc.opts>-Xdoclint:none</javadoc.opts>
+        <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -24,5 +28,137 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13.2</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>3.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.8.11</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.4.1</version>
+                    <configuration>
+                        <additionalJOptions>
+                            <additionalJOption>-Xdoclint:all</additionalJOption>
+                            <additionalJOption>-Xdoclint:-missing</additionalJOption>
+                        </additionalJOptions>
+                        <tags>
+                            <tag>
+                                <name>example</name>
+                                <placement>a</placement>
+                                <head>Example:</head>
+                            </tag>
+                            <tag>
+                                <name>note</name>
+                                <placement>a</placement>
+                                <head>Note:</head>
+                            </tag>
+                            <tag>
+                                <name>group</name>
+                                <placement>X</placement>
+                            </tag>
+                            <tag>
+                                <name>tparam</name>
+                                <placement>X</placement>
+                            </tag>
+                            <tag>
+                                <name>constructor</name>
+                                <placement>X</placement>
+                            </tag>
+                            <tag>
+                                <name>todo</name>
+                                <placement>X</placement>
+                            </tag>
+                            <tag>
+                                <name>groupname</name>
+                                <placement>X</placement>
+                            </tag>
+                        </tags>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.10.1</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <skipMain>true</skipMain> <!-- skip compile -->
+                        <skip>true</skip> <!-- skip testCompile -->
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <configuration>
+                        <attach>true</attach>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>create-source-jar</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                                <goal>test-jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- mvn package -Dmaven.test.skip=true -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <testFailureIgnore>true</testFailureIgnore>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+    </build>
 </project>
